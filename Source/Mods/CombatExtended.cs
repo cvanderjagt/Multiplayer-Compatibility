@@ -33,7 +33,7 @@ namespace Multiplayer.Compat
                 type = AccessTools.TypeByName("CombatExtended.Command_VerbTarget");
                 MP.RegisterSyncMethod(type, "ProcessInput");
 
-                type = AccessTools.TypeByName("CombatExtended.Update_Loadout");
+                type = AccessTools.TypeByName("CombatExtended.JobGiver_UpdateLoadout");
                 MP.RegisterSyncMethod(type, "TryGiveJob");
 
                 type = AccessTools.TypeByName("CombatExtended.Building_TurretGunCE");
@@ -69,7 +69,8 @@ namespace Multiplayer.Compat
                     AccessTools.Method("CombatExtended.ProjectileCE:TryCollideWith"),
                     AccessTools.Method("CombatExtended.Verb_LaunchProjectileCE:WarmupComplete"),
                     AccessTools.Method("CombatExtended.WeatherTracker:MapComponentTick"),
-                    AccessTools.Method("CombatExtended.JobGiver_TakeAndEquip:TryGiveJob"),
+                    //Adding this seems to cause desyncs?
+                    //AccessTools.Method("CombatExtended.JobGiver_TakeAndEquip:TryGiveJob"),
                 };
 
                 foreach(var method in methods) {
@@ -90,65 +91,3 @@ namespace Multiplayer.Compat
         }
     }
 }
-
-
-
-    // Float Menus
-        /*{
-            type = AccessTools.TypeByName("CombatExtended.HarmonyCE.FloatMenuMakerMap_Modify_AddHumanlikeOrders");
-
-            // CE_Stabilizing
-            MP.RegisterSyncDelegate(type, "<>c__DisplayClass1_1", "<AddMenuItems>b__1");
-
-            // PickUp
-            MP.RegisterSyncDelegate(type, "<>c__DisplayClass1_2", "<AddMenuItems>b__4");
-
-            // PickUpAll
-            MP.RegisterSyncDelegate(type, "<>c__DisplayClass1_2", "<AddMenuItems>b__5");
-
-            // PickUpSome
-            MP.RegisterSyncDelegate(type, "<>c__DisplayClass1_2", "<AddMenuItems>b__7");
-
-            // Dialog_Slider
-            MP.RegisterSyncDelegate(type, "<>c__DisplayClass1_3", "<AddMenuItems>b__6");
-        }
-            {
-                // Toggles
-                type = AccessTools.TypeByName("CombatExtended.CompFireModes");
-
-                MP.RegisterSyncMethod(type, "ResetModes");
-            }
-
-            // Turret Gizmos
-            {
-                type = AccessTools.TypeByName("CombatExtended.Building_TurretGunCE");
-
-            //MP.RegisterSyncMethod(type, "<GetGizmos>b__64_0");
-            //MP.RegisterSyncMethod(type, "<GetGizmos>b__64_1");
-
-            MP.RegisterSyncMethod(type, "TryOrderReload");
-        }*/
-
-        // Loadouts
-        /*{
-            type = AccessTools.TypeByName("CombatExtended.Utility_Loadouts");
-
-            MP.RegisterSyncMethod(type, "SetLoadout");
-            MP.RegisterSyncMethod(type, "SetLoadoutById");
-            MP.RegisterSyncMethod(type, "GenerateLoadoutFromPawn");
-        }
-        {
-            type = AccessTools.TypeByName("CombatExtended.Loadout");
-
-            MP.RegisterSyncMethod(type, "Copy", new SyncType[] { type });
-            MP.RegisterSyncMethod(type, "Copy");
-            MP.RegisterSyncMethod(type, "AddSlot");
-            MP.RegisterSyncMethod(type, "MoveSlot");
-            MP.RegisterSyncMethod(type, "RemoveSlot", new SyncType[] { typeof(int) });
-            MP.RegisterSyncMethod(type, "RemoveSlot", new SyncType[] { AccessTools.TypeByName("CombatExtended.LoadoutSlot") });
-        }
-
-        // iTab Inventory?
-        {
-            // TODO
-        }*/
